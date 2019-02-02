@@ -13,7 +13,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -45,12 +44,9 @@ public class UserRepositoryTest {
         assertThat(findAllUsers).size().isEqualTo(entityid.size());
     }
 
-    //TODO: use lambda
     @Test
     public void testFindUserByID() {
-        Optional<User> user = userRepository.findById(entityid.get(0));
-        assert (user.isPresent());
-
+        assertThat(userRepository.findById(entityid.get(0)).isPresent()).isEqualTo(true);
     }
 
     //TODO: use lambda
