@@ -27,7 +27,15 @@ repositories {
 }
 
 dependencies {
+    //Spring dependencies
     compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("com.h2database:h2")
+
+    //apache dependency
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+
+    //UnitTest dependencies
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile("org.springframework.boot:spring-boot-starter-test")
 }
