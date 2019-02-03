@@ -2,6 +2,7 @@
 package com.blackswan.test.task;
 
 import com.blackswan.test.user.User;
+import com.blackswan.test.user.User.UserId;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -11,20 +12,16 @@ import java.util.List;
 @Entity
 public class Task {
 
-//    private final User user;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private final List<TaskItem> taskItems = new ArrayList<TaskItem>();
+    private final UserId userId;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private final List<TaskItem> taskItems = new ArrayList<TaskItem>();
 
-    /*public Task(final User user) {
-        this.user = user;
+    public Task(final UserId userId) {
+        this.userId = userId;
     }
-
-    public User getUser() {
-        return user;
-    }*/
 
     public List<TaskItem> getTaskItems() {
         return taskItems;
@@ -32,6 +29,14 @@ public class Task {
 
     public void addTask(TaskItem taskItem) {
         taskItems.add(taskItem);
+    }
+
+    public UserId getUserId() {
+        return userId;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     //static to be instantiated outside of the enclosing class.
@@ -62,6 +67,22 @@ public class Task {
 
         public Date getDate() {
             return date;
+        }
+
+        public Long getId(){
+            return id;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public void setDate(Date date) {
+            this.date = date;
         }
     }
 }
