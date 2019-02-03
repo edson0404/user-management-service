@@ -1,4 +1,4 @@
-package com.blackswan.test;
+package com.blackswan.test.user;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

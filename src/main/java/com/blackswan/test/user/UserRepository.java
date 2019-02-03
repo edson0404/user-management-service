@@ -1,5 +1,6 @@
-package com.blackswan.test;
+package com.blackswan.test.user;
 
+import com.blackswan.test.user.User;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;

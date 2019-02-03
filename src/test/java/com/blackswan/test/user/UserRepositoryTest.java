@@ -1,5 +1,7 @@
-package com.blackswan.test;
+package com.blackswan.test.user;
 
+import com.blackswan.test.user.User;
+import com.blackswan.test.user.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
