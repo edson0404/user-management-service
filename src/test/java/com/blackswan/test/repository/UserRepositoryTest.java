@@ -1,6 +1,6 @@
-package com.blackswan.test.user;
+package com.blackswan.test.repository;
 
-import com.blackswan.test.repository.UserRepository;
+import com.blackswan.test.model.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,6 +13,10 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
+
+/**
+ * Created by EdsonvanWyk on 02/02/19.
+ */
 
 @RunWith(SpringRunner.class)
 @DataJpaTest

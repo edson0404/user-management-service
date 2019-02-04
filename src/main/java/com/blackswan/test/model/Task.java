@@ -37,6 +37,12 @@ public class Task {
     @JsonProperty("user_id")
     private User user;
 
+    public Task(String name, String description, Date date) {
+        this.name = name;
+        this.description = description;
+        this.date = date;
+    }
+
     public Long getId() {
         return id;
     }
