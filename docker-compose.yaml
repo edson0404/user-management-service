@@ -1,0 +1,24 @@
+version: '3'
+services:
+  crud-mysql:
+    container_name: crud-mysql
+    image: mysql/mysql-server:5.7
+    environment:
+      MYSQL_DATABASE: test
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_ROOT_HOST: '%'
+    ports:
+    - "3306:3306"
+    restart: always
+
+  user-management-service:
+    build: ./
+    volumes:
+    - .:/user-management-service
+    - ~/.m2:/root/.m2
+    working_dir: /user-management-service
+    ports:
+    - 8080:8080
+    command: bash -c "gradle clean bootRun"
+    depends_on:
+    - crud-mysql

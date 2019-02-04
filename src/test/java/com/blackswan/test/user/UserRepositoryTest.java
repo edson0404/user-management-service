@@ -1,5 +1,6 @@
 package com.blackswan.test.user;
 
+import com.blackswan.test.repository.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,22 +41,21 @@ public class UserRepositoryTest {
 
     @Test
     public void testFindUserByID() {
-        userRepository.findById(john.getId().getUserId()).ifPresent(user -> {
+        userRepository.findById(john.getId()).ifPresent(user -> {
             assertThat(user).isEqualTo(john);
         });
     }
 
-    //TODO: Apply orElse to test.
     @Test
     public void testUpdateUser() {
         //Update userName for jane
-        userRepository.findById(jane.getId().getUserId()).ifPresent(user -> {
+        userRepository.findById(jane.getId()).ifPresent(user -> {
             user.setUserName("janeDUpdate");
             userRepository.save(user);
         });
 
         //Assert userName update for jane
-        userRepository.findById(jane.getId().getUserId()).ifPresent(user -> {
+        userRepository.findById(jane.getId()).ifPresent(user -> {
             assertThat(user.getUserName()).isEqualToIgnoringCase("janeDUpdate");
         });
     }
@@ -63,13 +63,14 @@ public class UserRepositoryTest {
     @Test
     public void testDeleteUser() {
         //Find user and delete
-        Optional<User> user = userRepository.findById(john.getId().getUserId());
+        Optional<User> user = userRepository.findById(john.getId());
         if (user.isPresent())
             userRepository.delete(user.get());
         else
             fail("User not found");
 
         //assert deletion of user
-        assertThat(userRepository.findById(john.getId().getUserId()).isPresent()).isFalse();
+        assertThat(userRepository.findById(john.getId()).isPresent()).isFalse();
     }
 }
+
