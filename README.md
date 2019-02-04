@@ -40,9 +40,16 @@ To Run the user-management-service either use the gradle command or docker-compo
 ```
 uncomment # MySql docker DB configs in application.properties
 ```
-
 ```
-docker-compose -f docker-compose.yaml up --renew-anon-volumes user-management-service
+docker-compose -f docker-compose.yaml up --renew-anon-volumes user-management-service 
+```
+####MySql Docker DB
+```
+Login to mssql docker exec -it crud-mysql mysql -p 
+Enter password: password
+Query: 
+describe test.users;
+describe test.tasks;
 ```
 ## Curl commands to test (Note: \\")
 #### User
