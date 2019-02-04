@@ -38,7 +38,7 @@ To Run the user-management-service either use the gradle command or docker-compo
 
 #### Docker
 ```
-uncomment # MySql docker DB configs in application.properties
+uncomment  MySql docker DB configs in application.properties
 ```
 ```
 docker-compose -f docker-compose.yaml up --renew-anon-volumes user-management-service 
