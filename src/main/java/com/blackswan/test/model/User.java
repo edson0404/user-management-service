@@ -25,6 +25,8 @@ public class User {
     @JsonProperty("last_name")
     private String lastName;
 
+    protected User(){}
+
     public User( String userName, String firstName, String lastName) {
         this.userName = userName;
         this.firstName = firstName;

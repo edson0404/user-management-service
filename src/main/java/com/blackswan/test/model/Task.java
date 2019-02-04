@@ -14,7 +14,7 @@ import java.util.Date;
  */
 
 @Entity
-@Table(name = "task")
+@Table(name = "tasks")
 public class Task {
 
     @Id
@@ -27,7 +27,7 @@ public class Task {
 
     @JsonProperty("date_time")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
-    private Date date;//TODO: DateFormat to be transformed to number before set.
+    private Date date;//TODO: DateFormat to be transformed to long before set.
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
@@ -36,6 +36,8 @@ public class Task {
     @JsonIdentityReference(alwaysAsId=true)
     @JsonProperty("user_id")
     private User user;
+
+    protected Task(){}
 
     public Task(String name, String description, Date date) {
         this.name = name;

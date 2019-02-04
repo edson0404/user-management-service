@@ -25,19 +25,19 @@ public class TaskController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("api/user/{userId}/task")
+    @GetMapping("${spring.data.rest.base-path}/user/{userId}/task")
     public Page<Task> getAllTasksForUserId(@PathVariable(value = "userId") Long userId, Pageable pageable) {
         return taskRepository.findByUserId(userId, pageable);
     }
 
-    @GetMapping("api/user/{userId}/task/{taskId}")
+    @GetMapping("${spring.data.rest.base-path}/user/{userId}/task/{taskId}")
     public Task getTaskByIdAndUserId(@PathVariable(value = "userId") Long userId,
                                            @PathVariable(value = "taskId") Long taskId){
         //TODO: check first if present
         return taskRepository.findByIdAndUserId(taskId,userId).get();
     }
 
-    @PostMapping("api/user/{userId}/task")
+    @PostMapping("${spring.data.rest.base-path}/user/{userId}/task")
     public Task createTask(@PathVariable(value = "userId") Long userId,
                            @Valid @RequestBody Task task) {
         return userRepository.findById(userId).map(user -> {
@@ -46,7 +46,7 @@ public class TaskController {
         }).orElseThrow(() -> new ResourceNotFoundException("UserId " + userId + " not found"));
     }
 
-    @PutMapping("api/user/{userId}/task/{taskId}")
+    @PutMapping("${spring.data.rest.base-path}/user/{userId}/task/{taskId}")
     public Task updateTask(@PathVariable(value = "userId") Long userId,
                            @PathVariable(value = "taskId") Long taskId,
                            @Valid @RequestBody Task taskRequest) {
@@ -61,7 +61,7 @@ public class TaskController {
         }).orElseThrow(() -> new ResourceNotFoundException("TaskId " + taskId + "not found"));
     }
 
-    @DeleteMapping("api/user/{userId}/task/{taskId}")
+    @DeleteMapping("${spring.data.rest.base-path}/user/{userId}/task/{taskId}")
     public ResponseEntity<?> deleteTask(@PathVariable(value = "userId") Long userId,
                                         @PathVariable(value = "taskId") Long taskId) {
         return taskRepository.findByIdAndUserId(taskId, userId).map(task -> {

@@ -5,6 +5,7 @@ import com.blackswan.test.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.rest.webmvc.BasePathAwareController;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,23 +21,23 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("api/user")
+    @GetMapping("${spring.data.rest.base-path}/user")
     public Page<User> getAllUsers(Pageable pageable) {
         return userRepository.findAll(pageable);
     }
 
-    @GetMapping("api/user/{userId}")
+    @GetMapping("${spring.data.rest.base-path}/user/{userId}")
     public User findUserByID(@PathVariable Long userId) {
-        //TODO: check first if present
+        //TODO: check if present
         return userRepository.findById(userId).get();
     }
 
-    @PostMapping("api/user")
+    @PostMapping("${spring.data.rest.base-path}/user")
     public User createUser(@Valid @RequestBody User user) {
         return userRepository.save(user);
     }
 
-    @PutMapping("api/user/{userId}")
+    @PutMapping("${spring.data.rest.base-path}/user/{userId}")
     public User updateUser(@PathVariable Long userId, @Valid @RequestBody User userRequest) {
         return userRepository.findById(userId).map(user -> {
             user.setFirstName(userRequest.getFirstName() != null ? userRequest.getFirstName() : user.getFirstName());
